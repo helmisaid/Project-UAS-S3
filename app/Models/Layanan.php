@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,22 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Layanan extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id_layanan';
 
+    // Menentukan nama tabel yang digunakan di database
     protected $table = 'layanan';
 
     protected $fillable = [
-        'nama_layanan',
-        'status',
-        'id_karyawan', // Kolom yang menghubungkan layanan dengan karyawan
+        'nama_layanan', 'harga_layanan', 'id_karyawan'
     ];
 
-    // Relasi dengan model Karyawan (Jika hubungan satu ke banyak)
+    // Relasi ke Karyawan (One-to-Many)
     public function karyawan()
     {
         return $this->belongsTo(Karyawan::class, 'id_karyawan');
     }
-
-    public $primaryKey = 'id_layanan';
-    public $incrementing = true;
-    protected $keyType = 'int';
 }

@@ -24,57 +24,54 @@ class LayananController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi data yang diterima
         $validated = $request->validate([
             'nama_layanan' => 'required|string|max:255',
-            'status' => 'required|boolean',
-            'id_karyawan' => 'required|exists:karyawan,id_karyawan', // Validasi ID Karyawan
+            'harga_layanan' => 'required|numeric',
+            'id_karyawan' => 'required|exists:karyawan,id_karyawan',
         ]);
-
-        // Simpan layanan baru
+    
+    
         Layanan::create([
             'nama_layanan' => $request->nama_layanan,
-            'status' => $request->status,
-            'id_karyawan' => $request->id_karyawan, // Simpan ID Karyawan
+            'harga_layanan' => $request->harga_layanan,
+            'id_karyawan' => $request->id_karyawan,
         ]);
-
+    
         return redirect()->route('layanan.index')->with('success', 'Layanan berhasil ditambahkan.');
     }
-
-    public function edit($id)
+    
+    
+    public function edit($id_layanan)
     {
         // Ambil layanan yang akan diedit beserta data karyawan
-        $layanan = Layanan::findOrFail($id);
+        $layanan = Layanan::findOrFail($id_layanan);
         $karyawans = Karyawan::all(); // Ambil semua karyawan
         return view('layanan.edit', compact('layanan', 'karyawans'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_layanan)
     {
-        // Validasi data yang diterima
         $validated = $request->validate([
             'nama_layanan' => 'required|string|max:255',
-            'status' => 'required|boolean',
-            'id_karyawan' => 'required|exists:karyawan,id_karyawan', // Validasi ID Karyawan
+            'harga_layanan' => 'required|numeric',
+            'id_karyawan' => 'required|exists:karyawan,id_karyawan',
         ]);
-
-        // Cari layanan berdasarkan ID
-        $layanan = Layanan::findOrFail($id);
-
-        // Update data layanan
+    
+        $layanan = Layanan::findOrFail($id_layanan);
         $layanan->update([
             'nama_layanan' => $request->nama_layanan,
-            'status' => $request->status,
-            'id_karyawan' => $request->id_karyawan, // Update ID Karyawan
+            'harga_layanan' => $request->harga_layanan,
+            'id_karyawan' => $request->id_karyawan,
         ]);
-
+    
         return redirect()->route('layanan.index')->with('success', 'Layanan berhasil diperbarui.');
     }
 
-    public function destroy($id)
+
+    public function destroy($id_layanan)
     {
         // Cari dan hapus layanan berdasarkan ID
-        $layanan = Layanan::findOrFail($id);
+        $layanan = Layanan::findOrFail($id_layanan);
         $layanan->delete();
 
         return redirect()->route('layanan.index')->with('success', 'Layanan berhasil dihapus.');
