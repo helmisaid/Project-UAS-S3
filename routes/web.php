@@ -2,9 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KaryawanController;
-use App\Http\Controllers\JenisLayananController;
 use App\Http\Controllers\SatuanController;
-
+use App\Http\Controllers\LayananController;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -18,7 +17,11 @@ Route::put('karyawan/{karyawan}', [KaryawanController::class, 'update'])->name('
 Route::delete('karyawan/{karyawan}', [KaryawanController::class, 'destroy'])->name('karyawan.destroy');
 
 
-Route::resource('jenis-layanan', JenisLayananController::class);
+
+
+// Route untuk resource CRUD layanan
+Route::resource('layanan', LayananController::class);
+
 
 
 Route::resource('satuan', SatuanController::class);

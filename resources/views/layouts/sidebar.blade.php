@@ -73,7 +73,7 @@
                 </div>
 
                     <div class="menu-item">
-                        <a class="menu-link active" href="/jenis-layanan">
+                        <a class="menu-link active" href="/layanan">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                                 <span class="svg-icon svg-icon-2">
