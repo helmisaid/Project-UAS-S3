@@ -104,6 +104,38 @@
                             <span class="menu-title">Master satuan</span>
                         </a>
                     </div>
+                    <div class="menu-item">
+                        <a class="menu-link active" href="/barang">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="8" r="4" fill="black"/>
+                                        <rect x="4" y="14" width="16" height="6" rx="2" fill="black"/>
+                                        <rect opacity="0.3" x="4" y="10" width="16" height="4" rx="2" fill="black"/>
+                                    </svg>
+                                </span>
+                            </span>
+                            <span class="menu-title">Master Barang</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link active" href="/vendor">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="8" r="4" fill="black"/>
+                                        <rect x="4" y="14" width="16" height="6" rx="2" fill="black"/>
+                                        <rect opacity="0.3" x="4" y="10" width="16" height="4" rx="2" fill="black"/>
+                                    </svg>
+                                </span>
+                            </span>
+                            <span class="menu-title">Master Vendor</span>
+                        </a>
+                    </div>
+                </ul>
+
         <!--end::Menu-->
     </div>
     <!--end::Aside Menu-->

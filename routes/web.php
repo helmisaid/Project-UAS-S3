@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\LayananController;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\VendorController;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -25,6 +27,18 @@ Route::put('layanan/{id_layanan}', [LayananController::class, 'update'])->name('
 Route::delete('layanan/{id_layanan}', [LayananController::class, 'destroy'])->name('layanan.destroy');
 
 
-
-
 Route::resource('satuan', SatuanController::class);
+
+
+Route::resource('barang', BarangController::class);
+
+// Rute untuk CRUD Barang
+Route::get('barang', [BarangController::class, 'index'])->name('barang.index');
+Route::get('barang/create', [BarangController::class, 'create'])->name('barang.create');
+Route::post('barang', [BarangController::class, 'store'])->name('barang.store');
+Route::get('barang/{id}/edit', [BarangController::class, 'edit'])->name('barang.edit');
+Route::put('barang/{id}', [BarangController::class, 'update'])->name('barang.update');
+Route::delete('barang/{id}', [BarangController::class, 'destroy'])->name('barang.destroy');
+
+
+Route::resource('vendor', VendorController::class);
