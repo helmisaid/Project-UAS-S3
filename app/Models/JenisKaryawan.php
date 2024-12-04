@@ -8,8 +8,9 @@ class JenisKaryawan extends Model
 {
     protected $table = 'jenis_karyawan'; // Jika nama tabel Anda tidak sesuai dengan konvensi Laravel
 
+    protected $primaryKey = 'id_jenis_karyawan';
     protected $fillable = [
-        'id_jenis_karyawan', 'jenis_karyawan'
+        'jenis_karyawan'
     ];
 
 

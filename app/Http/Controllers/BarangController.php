@@ -12,39 +12,39 @@ class BarangController extends Controller
     {
         // Ambil semua data barang dari database
         $barangs = Barang::all();
-
+        
         // Tampilkan view index dengan data barang
         return view('barang.index', compact('barangs'));
     }
 
-    
+
       // Fungsi untuk menampilkan form tambah barang
         public function create()
         {
             return view('barang.create');
         }
-    
+
         public function edit($id)
         {
             // Mencari data barang berdasarkan ID
             $barang = Barang::findOrFail($id);
-        
+
             // Mengembalikan view dengan data barang
             return view('barang.edit', compact('barang'));
         }
-        
+
         public function destroy($id)
         {
             // Mencari data barang berdasarkan ID
             $barang = Barang::findOrFail($id);
-        
+
             // Menghapus data barang
             $barang->delete();
-        
+
             // Redirect kembali ke halaman daftar barang
             return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus!');
         }
-        
+
         public function store(Request $request)
         {
             // Validasi data
@@ -56,7 +56,7 @@ class BarangController extends Controller
                 'harga' => 'required|integer',
             ]);
 
-    
+
     // Simpan data ke database
     Barang::create($request->all());
 

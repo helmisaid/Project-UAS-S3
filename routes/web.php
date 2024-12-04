@@ -1,15 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\KaryawanController;
-use App\Http\Controllers\SatuanController;
-use App\Http\Controllers\LayananController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\LayananController;
+use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\JenisKaryawanController;
 
-Route::get('/', function () {
+
+Route::get('/dashboard', function () {
     return view('dashboard');
-});
+})->name('dashboard')->middleware('auth');
 
 Route::get('karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
 Route::get('karyawan/create', [KaryawanController::class, 'create'])->name('karyawan.create');
@@ -42,3 +45,10 @@ Route::delete('barang/{id}', [BarangController::class, 'destroy'])->name('barang
 
 
 Route::resource('vendor', VendorController::class);
+
+Route::resource('jeniskaryawan', JenisKaryawanController::class);
+
+// route autentikasi
+Route::get('/login', [AuthController::class, 'indexlogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::get('/logout', [AuthController::class, 'actionlogout'])->name('logout');

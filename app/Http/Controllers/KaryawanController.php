@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
 use App\Models\JenisKaryawan;
+use Illuminate\Support\Facades\Auth;
 
 class KaryawanController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
         $karyawans = Karyawan::all();
-        return view('karyawan.index', compact('karyawans'));
+        return view('karyawan.index', compact('karyawans', 'user'));
     }
 
     public function create()
