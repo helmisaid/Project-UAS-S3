@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
 use App\Models\JenisKaryawan;
@@ -12,15 +13,28 @@ class KaryawanController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $menus = Menu::whereIn('menu_id', function ($query) use ($user) {
+            $query->select('menu_id')
+                ->from('setting_menu_user')
+                ->where('id_jenis_karyawan', $user->id_jenis_karyawan);
+        })->orderBy('parent_id')->get();
+
         $karyawans = Karyawan::all();
-        return view('karyawan.index', compact('karyawans', 'user'));
+        return view('karyawan.index', compact('karyawans', 'user', 'menus'));
     }
 
     public function create()
     {
+        $user = Auth::user(); // Get the currently logged-in user
+        $menus = Menu::whereIn('menu_id', function ($query) use ($user) {
+            $query->select('menu_id')
+                ->from('setting_menu_user')
+                ->where('id_jenis_karyawan', $user->id_jenis_karyawan);
+        })->orderBy('parent_id')->get();
+
         $jenisKaryawans = JenisKaryawan::all();
 
-        return view('karyawan.create', compact('jenisKaryawans'));
+        return view('karyawan.create', compact('jenisKaryawans', 'menus'));
     }
 
     public function store(Request $request)
@@ -63,7 +77,14 @@ class KaryawanController extends Controller
         $karyawan = Karyawan::findOrFail($id_karyawan);
         $jenisKaryawans = JenisKaryawan::all();
 
-        return view('karyawan.edit', compact('karyawan', 'jenisKaryawans'));
+        $user = Auth::user(); // Get the currently logged-in user
+        $menus = Menu::whereIn('menu_id', function ($query) use ($user) {
+            $query->select('menu_id')
+                ->from('setting_menu_user')
+                ->where('id_jenis_karyawan', $user->id_jenis_karyawan);
+        })->orderBy('parent_id')->get();
+
+        return view('karyawan.edit', compact('karyawan', 'jenisKaryawans', 'menus'));
     }
 
     public function update(Request $request, $id)

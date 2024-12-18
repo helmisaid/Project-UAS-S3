@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!-- Toolbar -->
     <div class="toolbar" id="kt_toolbar">
         <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
             <div class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
@@ -10,48 +11,59 @@
             </div>
         </div>
     </div>
-    <!--begin::Post-->
+
+    <!-- Error Handling -->
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <!-- Begin Post -->
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <div id="kt_content_container" class="container-xxl">
-            <!--begin::Row-->
             <div class="row gy-5 g-xl-8">
-                <!--begin::Col-->
+                <!-- Begin Column -->
                 <div class="col-xxl-12">
-                    <!--begin::Card-->
-                    <div class="card card-xxl-stretch">
-                        <!--begin::Card header-->
-                        <div class="card-header border-0 bg-primary py-5">
-                            <h3 class="card-title fw-bolder text-white">Edit Jenis Karyawan</h3>
+                    <!-- Begin Card -->
+                    <div class="card shadow-sm">
+                        <!-- Begin Card Header -->
+                        <div class="card-header bg-light py-4">
+                            <h3 class="card-title fw-bolder">Form Edit Jenis Karyawan</h3>
                         </div>
-                        <!--end::Card header-->
+                        <!-- End Card Header -->
 
-                        <!--begin::Card body-->
-                        <div class="card-body">
+                        <!-- Begin Card Body -->
+                        <div class="card-body py-4">
                             <form action="{{ route('jeniskaryawan.update', $jenisKaryawan->id_jenis_karyawan) }}" method="POST">
                                 @csrf
                                 @method('PUT')
 
+                                <!-- Jenis Karyawan -->
                                 <div class="mb-10">
                                     <label for="jenis_karyawan" class="form-label">Jenis Karyawan</label>
-                                    <input type="text" id="jenis_karyawan" name="jenis_karyawan" class="form-control" placeholder="Masukkan Jenis Karyawan" value="{{ old('jenis_karyawan', $jenisKaryawan->jenis_karyawan) }}" required />
-                                    @error('jenis_karyawan')
-                                        <div class="text-danger mt-2">{{ $message }}</div>
-                                    @enderror
+                                    <input type="text" id="jenis_karyawan" name="jenis_karyawan" class="form-control" value="{{ old('jenis_karyawan', $jenisKaryawan->jenis_karyawan) }}" placeholder="Masukkan Jenis Karyawan" required />
                                 </div>
 
-                                <div>
+                                <!-- Submit Button -->
+                                <div class="d-flex justify-content-end">
                                     <button type="submit" class="btn btn-warning">Perbarui</button>
-                                    <a href="{{ route('jeniskaryawan.index') }}" class="btn btn-secondary">Kembali</a>
+                                    <a href="{{ route('jeniskaryawan.index') }}" class="btn btn-secondary ms-3">Kembali</a>
                                 </div>
                             </form>
                         </div>
-                        <!--end::Card body-->
+                        <!-- End Card Body -->
                     </div>
-                    <!--end::Card-->
+                    <!-- End Card -->
                 </div>
+                <!-- End Column -->
             </div>
         </div>
     </div>
-    <!--end::Post-->
+    <!-- End Post -->
 </div>
 @endsection

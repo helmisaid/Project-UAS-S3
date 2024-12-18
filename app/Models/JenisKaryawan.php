@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class JenisKaryawan extends Model
 {
     protected $table = 'jenis_karyawan'; // Jika nama tabel Anda tidak sesuai dengan konvensi Laravel
+    public $timestamps = false; // Nonaktifkan penggunaan timestamps
 
     protected $primaryKey = 'id_jenis_karyawan';
     protected $fillable = [

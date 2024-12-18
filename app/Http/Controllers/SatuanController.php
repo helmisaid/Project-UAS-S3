@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use App\Models\Satuan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SatuanController extends Controller
 {
@@ -14,8 +16,15 @@ class SatuanController extends Controller
      */
     public function index()
     {
+        $user = Auth::user(); // Dapatkan user yang sedang login
+        $menus = Menu::whereIn('menu_id', function ($query) use ($user) {
+            $query->select('menu_id')
+                ->from('setting_menu_user')
+                ->where('id_jenis_karyawan', $user->id_jenis_karyawan);
+        })->orderBy('parent_id')->get();
+
         $satuan = Satuan::all(); // Ambil semua data satuan
-        return view('satuan.index', compact('satuan'));
+        return view('satuan.index', compact('satuan', 'menus'));
     }
 
     /**
@@ -25,7 +34,14 @@ class SatuanController extends Controller
      */
     public function create()
     {
-        return view('satuan.create');
+        $user = Auth::user(); // Dapatkan user yang sedang login
+        $menus = Menu::whereIn('menu_id', function ($query) use ($user) {
+            $query->select('menu_id')
+                ->from('setting_menu_user')
+                ->where('id_jenis_karyawan', $user->id_jenis_karyawan);
+        })->orderBy('parent_id')->get();
+
+        return view('satuan.create', compact('menus'));
     }
 
     /**
@@ -60,9 +76,16 @@ class SatuanController extends Controller
      */
     public function edit($id)
     {
+        $user = Auth::user(); // Dapatkan user yang sedang login
+        $menus = Menu::whereIn('menu_id', function ($query) use ($user) {
+            $query->select('menu_id')
+                ->from('setting_menu_user')
+                ->where('id_jenis_karyawan', $user->id_jenis_karyawan);
+        })->orderBy('parent_id')->get();
+
         // Ambil data satuan berdasarkan ID
         $satuan = Satuan::findOrFail($id);
-        return view('satuan.edit', compact('satuan'));
+        return view('satuan.edit', compact('satuan', 'menus'));
     }
 
     /**

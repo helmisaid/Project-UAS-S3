@@ -1,32 +1,63 @@
 @extends('layouts.index')
 
 @section('content')
-<div class="container">
-    <h1>Tambah Layanan</h1>
-
-    <form action="{{ route('layanan.store') }}" method="POST">
-        @csrf
-        <div class="mb-3">
-            <label for="nama_layanan" class="form-label">Nama Layanan</label>
-            <input type="text" class="form-control" id="nama_layanan" name="nama_layanan" value="{{ old('nama_layanan') }}" required>
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!-- Toolbar -->
+    <div class="toolbar" id="kt_toolbar">
+        <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+            <div class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Tambah Layanan</h1>
+                <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
+            </div>
         </div>
+    </div>
 
-        <div class="mb-3">
-            <label for="id_karyawan" class="form-label">Karyawan</label>
-            <select class="form-control" id="id_karyawan" name="id_karyawan" required>
-                <option value="">Pilih Karyawan</option>
-                @foreach($karyawans as $karyawan)
-                    <option value="{{ $karyawan->id_karyawan }}" {{ old('id_karyawan') == $karyawan->id_karyawan ? 'selected' : '' }}>{{ $karyawan->nama_karyawan }}</option>
-                @endforeach
-            </select>
+    <!-- Begin Post -->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <div id="kt_content_container" class="container-xxl">
+            <div class="row gy-5 g-xl-8">
+                <!-- Begin Column -->
+                <div class="col-xxl-12">
+                    <!-- Begin Card -->
+                    <div class="card shadow-sm">
+                        <!-- Begin Card Header -->
+                        <div class="card-header bg-light py-4">
+                            <h3 class="card-title fw-bolder">Form Tambah Layanan</h3>
+                        </div>
+                        <!-- End Card Header -->
+
+                        <!-- Begin Card Body -->
+                        <div class="card-body py-4">
+                            <form action="{{ route('layanan.store') }}" method="POST">
+                                @csrf
+
+                                <!-- Nama Layanan -->
+                                <div class="mb-10">
+                                    <label for="nama_layanan" class="form-label">Nama Layanan</label>
+                                    <input type="text" name="nama_layanan" class="form-control" id="nama_layanan" value="{{ old('nama_layanan') }}" required>
+                                </div>
+
+                                <!-- Harga Layanan -->
+                                <div class="mb-10">
+                                    <label for="harga_layanan" class="form-label">Harga Layanan</label>
+                                    <input type="number" name="harga_layanan" class="form-control" id="harga_layanan" value="{{ old('harga_layanan') }}" required>
+                                </div>
+
+                                <!-- Buttons -->
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="submit" class="btn btn-success">Simpan</button>
+                                    <a href="{{ route('layanan.index') }}" class="btn btn-secondary">Kembali</a>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- End Card Body -->
+                    </div>
+                    <!-- End Card -->
+                </div>
+                <!-- End Column -->
+            </div>
         </div>
-
-        <div class="mb-3">
-            <label for="harga_layanan" class="form-label">Harga Layanan</label>
-            <input type="number" class="form-control" id="harga_layanan" name="harga_layanan" value="{{ old('harga_layanan') }}" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Simpan</button>
-    </form>
+    </div>
+    <!-- End Post -->
 </div>
 @endsection
